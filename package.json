@@ -1,28 +1,54 @@
 {
   "name": "lumos-os-complete",
-  "version": "2.0.0",
-  "description": "LumOS - Universal Polyglot Operating System with Lumos Language Integration",
+  "version": "2.1.0",
+  "description": "LumOS - Universal Polyglot Operating System with Lumos Language Integration, Network Tools, and Multi-OS Support",
   "private": true,
   "workspaces": [
     "frontend",
     "backend/lumos-engine"
   ],
   "scripts": {
-    "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\"",
+    "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\" \"npm run dev:lumos\"",
     "dev:frontend": "cd frontend && npm run dev",
     "dev:backend": "cd backend && cargo run",
-    "build": "npm run build:frontend && npm run build:backend",
+    "dev:lumos": "cd backend/lumos-engine && npm start",
+    "build": "npm run build:frontend && npm run build:backend && npm run build:lumos",
     "build:frontend": "cd frontend && npm run build",
     "build:backend": "cd backend && cargo build --release",
-    "install:all": "npm install && cd frontend && npm install && cd ../backend/lumos-engine && npm install"
+    "build:lumos": "cd backend/lumos-engine && npm install",
+    "install:all": "npm install && cd frontend && npm install && cd ../backend/lumos-engine && npm install",
+    "start": "npm run start:frontend",
+    "start:frontend": "cd frontend && npm start",
+    "start:backend": "cd backend && ./target/release/lumos_backend",
+    "test": "npm run test:frontend && npm run test:backend",
+    "test:frontend": "cd frontend && npm run test",
+    "test:backend": "cd backend && cargo test",
+    "lint": "npm run lint:frontend",
+    "lint:frontend": "cd frontend && npm run lint",
+    "clean": "rm -rf frontend/.next frontend/node_modules backend/target backend/lumos-engine/node_modules node_modules"
   },
   "devDependencies": {
     "concurrently": "^8.2.2"
   },
   "engines": {
     "node": ">=18.0.0",
-    "npm": ">=9.0.0"
+    "npm": ">=9.0.0",
+    "cargo": ">=1.70.0"
   },
+  "keywords": [
+    "lumos",
+    "os",
+    "polyglot",
+    "compiler",
+    "interpreter",
+    "network-tools",
+    "terminal",
+    "web-os"
+  ],
   "author": "Hirotoshi Uchida",
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Uchida16104/LumOS.git"
+  }
 }
