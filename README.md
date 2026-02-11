@@ -1,6 +1,6 @@
 # LumOS
 
-An OS that can be run in a browser derived from Lumos Language.
+An OS that can be run in a browser derived from [Lumos Language](https://github.com/Uchida16104/Lumos-Language).
 
 ## Architecture
 
