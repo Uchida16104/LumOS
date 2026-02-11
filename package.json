@@ -1,0 +1,28 @@
+{
+  "name": "lumos-os-complete",
+  "version": "2.0.0",
+  "description": "LumOS - Universal Polyglot Operating System with Lumos Language Integration",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend/lumos-engine"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\"",
+    "dev:frontend": "cd frontend && npm run dev",
+    "dev:backend": "cd backend && cargo run",
+    "build": "npm run build:frontend && npm run build:backend",
+    "build:frontend": "cd frontend && npm run build",
+    "build:backend": "cd backend && cargo build --release",
+    "install:all": "npm install && cd frontend && npm install && cd ../backend/lumos-engine && npm install"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  },
+  "author": "Hirotoshi Uchida",
+  "license": "MIT"
+}
