@@ -1,9 +1,8 @@
 services:
-  # The Rust Backend Service
   - type: web
     name: lumos-backend
     env: rust
-    region: singapore # Closest to Japan outside of Tokyo for Render
+    region: singapore
     plan: free
     buildCommand: cargo build --release
     startCommand: ./target/release/lumos_backend
@@ -14,9 +13,6 @@ services:
           property: connectionString
       - key: RUST_LOG
         value: info
-    # Note: To support COBOL, Fortran, etc., you would typically use a Docker runtime.
-    # Since Dockerfile is restricted by prompt, we assume Render's Native Environment 
-    # or this is a 'simulation' of those capabilities via the Rust binary.
 
 databases:
   - name: lumos-db
