@@ -8,14 +8,12 @@ services:
     startCommand: ./target/release/lumos_backend
     envVars:
       - key: DATABASE_URL
-        fromDatabase:
-          name: lumos-db
-          property: connectionString
+        value: postgresql://postgres:LumosLanguage2026@db.lxwracacdahhfxrfchtu.supabase.co:5432/postgres
       - key: RUST_LOG
         value: info
-
-databases:
-  - name: lumos-db
-    plan: free
-    databaseName: lumos
-    user: lumos_admin
+      - key: JWT_SECRET
+        value: lumos-secret-key-change-in-production-2026
+      - key: ALLOWED_ORIGINS
+        value: https://lumos-tawny-seven.vercel.app,http://localhost:3000
+      - key: PORT
+        value: 8080

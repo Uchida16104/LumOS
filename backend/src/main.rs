@@ -57,26 +57,6 @@ struct AuthRequest {
 }
 
 #[derive(Deserialize)]
-struct SSHRequest {
-    host: String,
-    port: u16,
-    username: String,
-    password: Option<String>,
-    key_path: Option<String>,
-    command: String,
-}
-
-#[derive(Deserialize)]
-struct FTPRequest {
-    host: String,
-    port: u16,
-    username: String,
-    password: String,
-    operation: String,
-    path: Option<String>,
-}
-
-#[derive(Deserialize)]
 struct NetworkRequest {
     tool: String,
     target: Option<String>,
@@ -193,10 +173,9 @@ async fn status() -> impl Responder {
             "ping".to_string(),
             "traceroute".to_string(),
             "nmap".to_string(),
-            "ssh".to_string(),
-            "ftp".to_string(),
             "ifconfig".to_string(),
             "arp".to_string(),
+            "netstat".to_string(),
         ],
     };
     HttpResponse::Ok().json(status)
@@ -273,19 +252,6 @@ async fn execute_code(req: HttpRequest, exec_req: web::Json<ExecRequest>, auth_s
             Command::new("/tmp/temp_rust_binary")
                 .output()
         },
-        "cobol" => {
-            std::fs::write("/tmp/temp_cobol.cob", &exec_req.code_snippet)
-                .unwrap_or_default();
-            Command::new("cobc")
-                .arg("-x")
-                .arg("-o")
-                .arg("/tmp/temp_cobol")
-                .arg("/tmp/temp_cobol.cob")
-                .output()
-                .ok();
-            Command::new("/tmp/temp_cobol")
-                .output()
-        },
         _ => return HttpResponse::BadRequest().json(ApiResponse::error("Unsupported language".to_string())),
     };
 
@@ -296,6 +262,7 @@ async fn execute_code(req: HttpRequest, exec_req: web::Json<ExecRequest>, auth_s
             HttpResponse::Ok().json(ApiResponse::success(serde_json::json!({
                 "stdout": stdout,
                 "stderr": stderr,
+                "output": format!("{}\n{}", stdout, stderr),
                 "exit_code": o.status.code().unwrap_or(-1)
             })))
         },
@@ -312,13 +279,7 @@ async fn execute_command(req: HttpRequest, cmd_req: web::Json<CommandRequest>, a
     let os_type = cmd_req.os_type.as_deref().unwrap_or("linux");
     
     let output = match os_type {
-        "linux" | "ubuntu" | "debian" | "kali" | "centos" => {
-            Command::new("sh")
-                .arg("-c")
-                .arg(&cmd_req.command)
-                .output()
-        },
-        "macos" => {
+        "linux" | "ubuntu" | "debian" | "kali" | "centos" | "macos" => {
             Command::new("sh")
                 .arg("-c")
                 .arg(&cmd_req.command)
@@ -387,40 +348,14 @@ async fn network_tool(req: HttpRequest, net_req: web::Json<NetworkRequest>, auth
             Command::new("ifconfig")
                 .output()
         },
-        "ip" => {
-            Command::new("ip")
-                .arg("addr")
-                .output()
-        },
         "arp" => {
             Command::new("arp")
                 .arg("-a")
                 .output()
         },
-        "arp-scan" => {
-            Command::new("arp-scan")
-                .arg("--localnet")
-                .output()
-        },
         "netstat" => {
             Command::new("netstat")
                 .arg("-tuln")
-                .output()
-        },
-        "tcpdump" => {
-            Command::new("tcpdump")
-                .arg("-i")
-                .arg("any")
-                .arg("-c")
-                .arg("10")
-                .output()
-        },
-        "tshark" => {
-            Command::new("tshark")
-                .arg("-i")
-                .arg("any")
-                .arg("-c")
-                .arg("10")
                 .output()
         },
         _ => return HttpResponse::BadRequest().json(ApiResponse::error("Unsupported network tool".to_string())),
@@ -440,34 +375,6 @@ async fn network_tool(req: HttpRequest, net_req: web::Json<NetworkRequest>, auth
     }
 }
 
-#[post("/ssh/execute")]
-async fn ssh_execute(req: HttpRequest, ssh_req: web::Json<SSHRequest>, auth_state: web::Data<AuthState>) -> impl Responder {
-    if let Err(e) = verify_basic_auth(&req, &auth_state) {
-        return HttpResponse::Unauthorized().json(ApiResponse::error(e));
-    }
-
-    HttpResponse::Ok().json(ApiResponse::success(serde_json::json!({
-        "message": "SSH execution simulated",
-        "host": ssh_req.host,
-        "command": ssh_req.command,
-        "note": "Actual SSH implementation requires proper key management and secure connections"
-    })))
-}
-
-#[post("/ftp/operation")]
-async fn ftp_operation(req: HttpRequest, ftp_req: web::Json<FTPRequest>, auth_state: web::Data<AuthState>) -> impl Responder {
-    if let Err(e) = verify_basic_auth(&req, &auth_state) {
-        return HttpResponse::Unauthorized().json(ApiResponse::error(e));
-    }
-
-    HttpResponse::Ok().json(ApiResponse::success(serde_json::json!({
-        "message": "FTP operation simulated",
-        "host": ftp_req.host,
-        "operation": ftp_req.operation,
-        "note": "Actual FTP implementation requires proper connection management"
-    })))
-}
-
 #[post("/lumos/execute")]
 async fn lumos_execute(req: HttpRequest, lumos_req: web::Json<LumosRequest>, auth_state: web::Data<AuthState>) -> impl Responder {
     if let Err(e) = verify_basic_auth(&req, &auth_state) {
@@ -477,7 +384,7 @@ async fn lumos_execute(req: HttpRequest, lumos_req: web::Json<LumosRequest>, aut
     std::fs::write("/tmp/temp_lumos.lumos", &lumos_req.code).unwrap_or_default();
     
     let output = Command::new("node")
-        .arg("/app/backend/lumos-engine/src/index.js")
+        .arg("/app/backend/lumos-engine/index.cjs")
         .arg("/tmp/temp_lumos.lumos")
         .output();
 
@@ -506,10 +413,10 @@ async fn lumos_compile(req: HttpRequest, lumos_req: web::Json<LumosRequest>, aut
     std::fs::write("/tmp/temp_lumos.lumos", &lumos_req.code).unwrap_or_default();
     
     let output = Command::new("node")
-        .arg("/app/backend/lumos-engine/src/index.js")
-        .arg("--compile")
-        .arg(target)
+        .arg("/app/backend/lumos-engine/index.cjs")
+        .arg("compile")
         .arg("/tmp/temp_lumos.lumos")
+        .arg(target)
         .output();
 
     match output {
@@ -589,7 +496,8 @@ async fn main() -> std::io::Result<()> {
 
     HttpServer::new(move || {
         let cors = Cors::default()
-            .allow_any_origin()
+            .allowed_origin("https://lumos-tawny-seven.vercel.app")
+            .allowed_origin("http://localhost:3000")
             .allow_any_method()
             .allow_any_header()
             .max_age(3600);
@@ -605,8 +513,6 @@ async fn main() -> std::io::Result<()> {
             .service(execute_code)
             .service(execute_command)
             .service(network_tool)
-            .service(ssh_execute)
-            .service(ftp_operation)
             .service(lumos_execute)
             .service(lumos_compile)
             .service(data_process)

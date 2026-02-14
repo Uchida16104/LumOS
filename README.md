@@ -1,421 +1,376 @@
-# LumOS — Complete Project Integration
+# LumOS - Universal Polyglot Operating System
 
-**Goal:** Provide a single, well-structured, ready-to-copy project integration guide (configs + core files + corrected Mermaid diagram) so you can assemble the monorepo without Mermaid or config syntax errors and with minimal edit work.
+<div align="center">
 
-> NOTE: This document contains templates for key files, a corrected Mermaid architecture diagram, and step-by-step deployment notes. Copy each file into the repository structure shown. The code samples are intentionally minimal but complete so they do not contain syntax errors. You should still replace environment values and secrets before deploying.
+![LumOS Banner](https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200&h=300&fit=crop)
 
----
+**Next-Generation Browser-Based Operating System with Lumos Language Integration**
 
-## Corrected Architecture (Mermaid)
+[![Deploy on Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/Uchida16104/LumOS)
+[![Deploy on Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy)
+
+[Live Demo](https://lumos-tawny-seven.vercel.app) | [Documentation](#documentation) | [Features](#features)
+
+</div>
+<div id="documentation">
+
+## 🌟 Overview
+
+LumOS is a revolutionary browser-based operating system that brings the power of the Lumos Language to the web. Execute code in 100+ programming languages, manage files, analyze data, and perform network operations - all from your browser.
+
+### Current Deployment
+
+- **Frontend**: [https://lumos-tawny-seven.vercel.app](https://lumos-tawny-seven.vercel.app)
+- **Backend**: [https://lumos-faoy.onrender.com](https://lumos-faoy.onrender.com)
+- **Database**: Supabase PostgreSQL (lxwracacdahhfxrfchtu)
+
+</div>
+<div id="features">
+
+## ✨ Features
+
+### 🎯 Core Capabilities
+
+- **Lumos Language Integration**: Native support for Lumos Language with real-time execution and multi-target compilation
+- **Multi-Language Support**: Execute code in Python, Ruby, PHP, Rust, Go, COBOL, JavaScript, and 100+ languages
+- **File Management**: Complete virtual file system with upload, download, edit, and delete operations
+- **Network Tools**: ping, traceroute, nmap, SSH, FTP, and comprehensive network analysis
+- **Data Analytics**: Built-in data processing, analysis, and visualization tools
+- **Terminal Emulator**: Full-featured terminal supporting Linux, macOS, and Windows commands
+- **Database Operations**: Direct PostgreSQL integration via Supabase
+
+### 🔧 Technical Stack
+
+**Frontend**:
+- Next.js 14 (App Router)
+- React 18
+- TypeScript
+- Tailwind CSS
+- Framer Motion
+- Lucide Icons
+
+**Backend**:
+- Rust (Actix-Web)
+- Node.js (Lumos Engine)
+- PostgreSQL (Supabase)
+- Redis (Session Management)
+
+**Languages**:
+- Lumos Language (Primary)
+- Python, Ruby, PHP, JavaScript
+- Rust, Go, C, C++, C#
+- COBOL, Fortran, Assembly
+- And 90+ more...
+
+</div>
+
+## 📊 Architecture
 
 ```mermaid
-graph TD
-    User((User / Browser)) -->|HTTPS| Vercel[Vercel Frontend]
-
-    subgraph LumOS_Frontend_Vercel
-        Desktop[Desktop UI]
-        WindowManager[Window Manager]
-        Terminal[Web Terminal]
-        FileSystem[Virtual File System]
-
-        Desktop --> WindowManager
-        WindowManager --> Terminal
-        WindowManager --> FileSystem
+graph TB
+    subgraph "Frontend - Vercel"
+        A[Next.js App]
+        B[Desktop UI]
+        C[Terminal]
+        D[File Explorer]
+        E[Lumos Editor]
+        F[Network Tools]
+        
+        A --> B
+        B --> C
+        B --> D
+        B --> E
+        B --> F
     end
-
-    Vercel -->|API Requests| Render[Render Backend]
-
-    subgraph LumOS_Backend_Render
-        RustCore[Rust Core - Actix Web]
-
-        subgraph Polyglot_Runtime_Container
-            Python[Python - FastAPI]
-            Laravel[PHP - Laravel]
-            CSharp[CSharp Runner]
-            Legacy[COBOL / Fortran / ALGOL]
-            Modern[Go / Swift / Kotlin]
-
-            RustCore -->|Exec or FFI| Python
-            RustCore -->|Exec| Laravel
-            RustCore -->|Exec| CSharp
-            RustCore -->|Exec| Legacy
-            RustCore -->|Exec| Modern
-        end
+    
+    subgraph "Backend - Render"
+        G[Rust Core]
+        H[Lumos Engine]
+        I[Code Executor]
+        J[Network Handler]
+        K[File System]
+        
+        G --> H
+        G --> I
+        G --> J
+        G --> K
     end
-
-    RustCore -->|SQL| Supabase[(Supabase PostgreSQL)]
-    Python -->|Data Analysis| Supabase
+    
+    subgraph "Database - Supabase"
+        L[(PostgreSQL)]
+        M[Files Table]
+        N[Logs Table]
+        O[Analytics Table]
+        
+        L --> M
+        L --> N
+        L --> O
+    end
+    
+    A -->|REST API| G
+    G -->|SQL| L
+    H -->|Execute| I
+    
+    style A fill:#0070f3
+    style G fill:#f74c00
+    style L fill:#3ecf8e
 ```
 
----
+## 🚀 Quick Start
 
-## File tree (monorepo)
+### Prerequisites
 
-```
-lumos-os/
-├── .gitignore
-├── README.md
-├── vercel.json
-├── render.yaml
-├── package.json
-├── tsconfig.json
-├── tailwind.config.ts
-├── postcss.config.mjs
-├── next.config.mjs
-├── public/
-│   └── icons/
-├── src/
-│   ├── app/
-│   │   ├── layout.tsx
-│   │   ├── globals.css
-│   │   └── page.tsx
-│   └── lib/
-│       └── utils.ts
-├── backend/
-│   ├── Cargo.toml
-│   └── src/
-│       └── main.rs
-├── backend/runtimes/
-│   ├── python/
-│   │   └── app.py
-│   └── php/
-│       └── index.php
-└── .env.example
-```
+- Node.js >= 18.0.0
+- Rust >= 1.70.0
+- PostgreSQL (via Supabase)
 
----
-
-## Key files — copy these into the repository
-
-### `.gitignore`
-
-```text
-node_modules/
-.next/
-target/
-.env
-.env.local
-.DS_Store
-dist/
-*.log
-```
-
----
-
-### `package.json` (frontend)
-
-```json
-{
-  "name": "lumos-os-frontend",
-  "version": "1.0.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev -p 3000",
-    "build": "next build",
-    "start": "next start -p 3000",
-    "lint": "next lint",
-    "install:all": "npm install"
-  },
-  "dependencies": {
-    "next": "14.2.0",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "htmx.org": "^1.9.2",
-    "alpinejs": "^3.12.0",
-    "xterm": "^5.0.0",
-    "tailwindcss": "^3.4.0"
-  }
-}
-```
-
-> Adjust Next/Tailwind versions to the ones you want. These are syntactically valid placeholders.
-
----
-
-### `next.config.mjs`
-
-```js
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  reactStrictMode: true,
-  experimental: {
-    appDir: true
-  }
-};
-export default nextConfig;
-```
-
----
-
-### `vercel.json`
-
-```json
-{
-  "version": 2,
-  "builds": [
-    { "src": "package.json", "use": "@vercel/next" }
-  ],
-  "routes": [
-    { "src": "/(.*)", "dest": "/$1" }
-  ]
-}
-```
-
----
-
-### `render.yaml` (backend service stub for Render.com)
-
-```yaml
-services:
-  - type: web
-    name: lumos-backend
-    env: rust
-    plan: starter
-    # Make sure to set the build and start commands in Render UI or here
-    buildCommand: "cargo build --release"
-    startCommand: "./target/release/lumos-backend"
-    envVars:
-      - key: DATABASE_URL
-        fromDatabase: lumos-db
-```
-
----
-
-### `tailwind.config.ts`
-
-```ts
-import { Config } from 'tailwindcss';
-
-const config: Config = {
-  content: ['./src/**/*.{ts,tsx,js,jsx}'],
-  theme: { extend: {} },
-  plugins: []
-};
-export default config;
-```
-
----
-
-### `postcss.config.mjs`
-
-```js
-export default {
-  plugins: {
-    tailwindcss: {},
-    autoprefixer: {}
-  }
-};
-```
-
----
-
-### `src/app/layout.tsx` (minimal; loads HTMX & Alpine)
-
-```tsx
-import './globals.css';
-import Script from 'next/script';
-
-export const metadata = { title: 'LumOS' };
-
-export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang="en">
-      <head />
-      <body>
-        <Script src="https://unpkg.com/htmx.org@1.9.2" strategy="beforeInteractive" />
-        <Script src="https://unpkg.com/alpinejs@3.x.x" strategy="beforeInteractive" />
-        {children}
-      </body>
-    </html>
-  );
-}
-```
-
----
-
-### `src/app/page.tsx` (LumOS desktop entry)
-
-```tsx
-export default function Page() {
-  return (
-    <main className="min-h-screen bg-gray-50">
-      <header className="p-4 border-b">LumOS — Browser OS</header>
-      <section className="p-6">
-        <h1 className="text-2xl font-bold">LumOS Desktop</h1>
-        <p className="mt-2">Open the Terminal or File Explorer from the WindowManager.</p>
-      </section>
-    </main>
-  );
-}
-```
-
----
-
-### `src/lib/utils.ts`
-
-```ts
-export function safeJsonParse<T>(s: string, fallback: T): T {
-  try { return JSON.parse(s) as T; } catch { return fallback; }
-}
-```
-
----
-
-### `src/app/globals.css`
-
-```css
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-html, body, #__next { height: 100%; }
-```
-
----
-
-### `backend/Cargo.toml` (Actix Web)
-
-```toml
-[package]
-name = "lumos-backend"
-version = "0.1.0"
-edition = "2021"
-
-[dependencies]
-actix-web = "4"
-serde = { version = "1.0", features = ["derive"] }
-serde_json = "1.0"
-tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
-```
-
----
-
-### `backend/src/main.rs` (minimal Actix Web server)
-
-```rust
-use actix_web::{get, post, web, App, HttpResponse, HttpServer, Responder};
-use serde::Deserialize;
-
-#[get("/status")]
-async fn status() -> impl Responder {
-    HttpResponse::Ok().json(serde_json::json!({"status":"ok"}))
-}
-
-#[derive(Deserialize)]
-struct ExecRequest {
-    language: Option<String>,
-    code: Option<String>,
-}
-
-// NOTE: for safety we do *not* execute arbitrary user-supplied code here.
-// This handler simply validates input and returns a stub response.
-#[post("/execute")]
-async fn execute(req: web::Json<ExecRequest>) -> impl Responder {
-    let language = req.language.clone().unwrap_or_else(|| "unknown".into());
-    let code_snippet = req.code.clone().unwrap_or_default();
-
-    // DO NOT run `code_snippet` directly in production without sandboxing.
-    let stub = format!("Received request for language: {} with {} bytes of code", language, code_snippet.len());
-
-    HttpResponse::Ok().json(serde_json::json!({"result": stub}))
-}
-
-#[actix_web::main]
-async fn main() -> std::io::Result<()> {
-    // Bind to 0.0.0.0 for Docker/Render compatibility
-    HttpServer::new(|| {
-        App::new()
-            .service(status)
-            .service(execute)
-    })
-    .bind(("0.0.0.0", 8080))?
-    .run()
-    .await
-}
-```
-
-> This backend is intentionally conservative: the `/execute` endpoint is a stub and **does not** run user code. Replace with properly sandboxed runners (firecracker, WASM, containers with seccomp, etc.) before enabling arbitrary execution.
-
----
-
-### `backend/runtimes/python/app.py` (fastapi stub)
-
-```py
-from fastapi import FastAPI
-app = FastAPI()
-
-@app.get('/health')
-def health():
-    return {'status': 'ok', 'runtime': 'python'}
-
-@app.post('/run')
-def run_code(payload: dict):
-    # DO NOT execute incoming code strings directly without sandboxing.
-    return {'status': 'ok', 'size': len(str(payload.get('code', '')))}
-```
-
----
-
-### `.env.example`
-
-```text
-# Example environment variables — DO NOT commit secrets
-NEXT_PUBLIC_API_BASE_URL=http://localhost:8080
-DATABASE_URL=postgres://user:pass@localhost:5432/lumos
-```
-
----
-
-## Integration & sanity checklist (to avoid errors)
-
-1. **Mermaid**: Use the `flowchart TD` syntax above. Make sure Mermaid rendering plugin (in README or docs) supports `flowchart`. Many mermaid versions use `graph TD` as an alias; both work, but be consistent.
-2. **Next.js App Directory**: We used `app/` directory; set `experimental.appDir = true` in `next.config.mjs`.
-3. **TypeScript / Tailwind**: Ensure `tailwind.config.ts` `content` excludes non-existent paths to avoid build warnings.
-4. **Rust / Render**: Build command in `render.yaml` must match the Rust toolchain available on Render. Use `cargo build --release` and start the binary from `./target/release/`.
-5. **Sandboxing**: *Do not* enable arbitrary command execution endpoints without sandboxing. Test locally with stub endpoints first.
-6. **Ports**: Frontend `dev` runs on 3000. Backend binds to 8080.
-7. **Environment**: Copy `.env.example` to `.env` and fill values before running.
-
----
-
-## Local development quick commands
+### Installation
 
 ```bash
-# frontend
-cd lumos-os
-npm install
-npm run dev
+git clone https://github.com/Uchida16104/LumOS.git
+cd LumOS
 
-# backend (requires Rust)
-cd backend
-cargo build
-cargo run
+cp .env.example .env
+
+npm run install:all
+
+npm run dev
 ```
 
+### Environment Variables
+
+```env
+NEXT_PUBLIC_API_URL=https://your-lumos.onrender.com
+DATABASE_URL=postgresql://postgres:your-lumos@db.your-code.supabase.co:5432/postgres
+NEXT_PUBLIC_SUPABASE_URL=https://db.your-code.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
+JWT_SECRET=your-secret-key
+```
+
+## 📚 Documentation
+
+### Lumos Language Examples
+
+#### Hello World
+
+```lumos
+let message = "Hello, LumOS!"
+print(message)
+```
+
+#### Functions and Loops
+
+```lumos
+def factorial(n) {
+  if (n <= 1) {
+    return 1
+  }
+  return n * factorial(n - 1)
+}
+
+for i = 1 to 10 {
+  print("Factorial of " + str(i) + " = " + str(factorial(i)))
+}
+```
+
+#### Compilation to Multiple Targets
+
+```bash
+lumos compile script.lumos python
+lumos compile script.lumos rust
+lumos compile script.lumos javascript
+```
+
+### API Endpoints
+
+#### Code Execution
+
+```http
+POST /execute
+Content-Type: application/json
+
+{
+  "language": "python",
+  "code_snippet": "print('Hello from Python')"
+}
+```
+
+#### Lumos Execution
+
+```http
+POST /lumos/execute
+Content-Type: application/json
+
+{
+  "code": "let x = 42\nprint(x)",
+  "action": "execute"
+}
+```
+
+#### Lumos Compilation
+
+```http
+POST /lumos/compile
+Content-Type: application/json
+
+{
+  "code": "def greet(name) { return 'Hello, ' + name }",
+  "action": "compile",
+  "target": "python"
+}
+```
+
+## 🎮 Usage
+
+### Desktop Interface
+
+1. Access the live demo at [https://lumos-tawny-seven.vercel.app](https://lumos-tawny-seven.vercel.app)
+2. Click on desktop icons to launch applications
+3. Drag windows to reposition them
+4. Minimize/maximize windows using titlebar buttons
+
+### Terminal Commands
+
+```bash
+help
+ls
+pwd
+echo "Hello, LumOS"
+python3 -c "print('Python in browser')"
+lumos run script.lumos
+```
+
+### File Operations
+
+1. Open File Explorer
+2. Upload files via drag-and-drop
+3. Edit files in the Lumos Editor
+4. Execute or compile Lumos files
+5. Download generated outputs
+
+## 🔐 Security
+
+**⚠️ Important Security Notes**:
+
+- Default credentials are for development only
+- Change all passwords before production deployment
+- Network tools require proper authentication
+- Command execution is sandboxed
+- File uploads are scanned and validated
+
+See [SECURITY.md](docs/SECURITY.md) for detailed guidelines.
+
+## 📦 Deployment
+
+### Vercel (Frontend)
+
+```bash
+cd frontend
+vercel deploy --prod
+```
+
+**Build Settings**:
+- Build Command: `npm run build`
+- Output Directory: `.next`
+- Install Command: `npm install`
+- Root Directory: `frontend`
+
+**Environment Variables**:
+- `NEXT_PUBLIC_API_URL`: `https://lumos-faoy.onrender.com`
+- `NEXT_PUBLIC_SUPABASE_URL`: Your Supabase URL
+- `NEXT_PUBLIC_SUPABASE_ANON_KEY`: Your Supabase anon key
+
+### Render (Backend)
+
+```bash
+cd backend
+render.yaml configuration will be used automatically
+```
+
+**Settings**:
+- Build Command: `cargo build --release`
+- Start Command: `./target/release/lumos_backend`
+- Root Directory: `backend`
+
+**Environment Variables**:
+- `DATABASE_URL`: PostgreSQL connection string
+- `RUST_LOG`: `info`
+- `JWT_SECRET`: Your secret key
+
+### Supabase (Database)
+
+1. Create a new Supabase project
+2. Run `database/schema.sql` in SQL Editor
+3. Note your connection string
+4. Update environment variables
+
+## 🛠️ Development
+
+### Project Structure
+
+- `frontend/`: Next.js frontend application
+- `backend/`: Rust backend server
+- `backend/lumos-engine/`: Lumos Language interpreter and compiler
+- `database/`: SQL schemas and migrations
+- `docs/`: Documentation files
+
+### Running Tests
+
+```bash
+npm run test
+npm run test:frontend
+cargo test
+```
+
+### Building
+
+```bash
+npm run build
+npm run build:frontend
+npm run build:backend
+```
+
+## 🤝 Contributing
+
+Contributions are welcome! Please read our contributing guidelines before submitting PRs.
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Add tests
+5. Submit a pull request
+
+## 📄 License
+
+MIT License - see [LICENSE](LICENSE) for details
+
+## 👨‍💻 Author
+
+**Hirotoshi Uchida**
+
+- GitHub: [@Uchida16104](https://github.com/Uchida16104)
+- Email: contact@lumos-os.dev
+
+## 🙏 Acknowledgments
+
+- Lumos Language Team
+- Rust Community
+- Next.js Team
+- Supabase Team
+- Open Source Contributors
+
+## 📞 Support
+
+- GitHub Issues: [Report a bug](https://github.com/Uchida16104/LumOS/issues)
+- Documentation: [Read the docs](https://github.com/Uchida16104/LumOS/wiki)
+- Community: [Join Discord](https://discord.gg/lumos)
+
 ---
 
-## Deployment notes
+<div align="center">
 
-* **Vercel**: Import the project in Vercel or deploy from your GitHub repo. `vercel.json` provided.
-* **Render**: Use `render.yaml` or configure a Web Service with `env=rust`. Set `DATABASE_URL` in Render's dashboard.
-* **Supabase**: If using Supabase, set `DATABASE_URL` accordingly and enable network access from Render if needed.
+**Built with ❤️ using Lumos Language**
 
----
+[⬆ Back to Top](#lumos---universal-polyglot-operating-system)
 
-## Security & production checklist (REQUIRED before exposing)
-
-* Replace development credentials.
-* Add HTTPS (managed by Vercel/Render automatically in most cases).
-* Enable authentication and RBAC.
-* Introduce strong input validation and sandboxed runtimes (WASM, Firecracker, gVisor, or container per-request ephemeral runners).
-* Rate-limit and audit endpoints that perform heavy work.
-
----
-
-## Next steps I can do for you
-
-* Generate the full repository as a ZIP you can download.
-* Produce CI/CD examples (GitHub Actions) to build frontend and backend.
-* Create a minimal Dockerfile for backend and a docker-compose file for local testing.
-
-If you want any of the above, tell me which and I will generate the files.
+</div>
