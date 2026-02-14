@@ -12,6 +12,7 @@
 [Live Demo](https://lumos-tawny-seven.vercel.app) | [Documentation](#documentation) | [Features](#features)
 
 </div>
+<div id="documentation">
 
 ## 🌟 Overview
 
@@ -22,6 +23,9 @@ LumOS is a revolutionary browser-based operating system that brings the power of
 - **Frontend**: [https://lumos-tawny-seven.vercel.app](https://lumos-tawny-seven.vercel.app)
 - **Backend**: [https://lumos-faoy.onrender.com](https://lumos-faoy.onrender.com)
 - **Database**: Supabase PostgreSQL (lxwracacdahhfxrfchtu)
+
+</div>
+<div id="features">
 
 ## ✨ Features
 
@@ -58,9 +62,11 @@ LumOS is a revolutionary browser-based operating system that brings the power of
 - COBOL, Fortran, Assembly
 - And 90+ more...
 
+</div>
+
 ## 📊 Architecture
 
-\`\`\`mermaid
+```mermaid
 graph TB
     subgraph "Frontend - Vercel"
         A[Next.js App]
@@ -108,7 +114,7 @@ graph TB
     style A fill:#0070f3
     style G fill:#f74c00
     style L fill:#3ecf8e
-\`\`\`
+```
 
 ## 🚀 Quick Start
 
@@ -120,7 +126,7 @@ graph TB
 
 ### Installation
 
-\`\`\`bash
+```bash
 git clone https://github.com/Uchida16104/LumOS.git
 cd LumOS
 
@@ -129,17 +135,17 @@ cp .env.example .env
 npm run install:all
 
 npm run dev
-\`\`\`
+```
 
 ### Environment Variables
 
-\`\`\`env
-NEXT_PUBLIC_API_URL=https://lumos-faoy.onrender.com
-DATABASE_URL=postgresql://postgres:LumosLanguage2026@db.lxwracacdahhfxrfchtu.supabase.co:5432/postgres
-NEXT_PUBLIC_SUPABASE_URL=https://db.lxwracacdahhfxrfchtu.supabase.co
+```env
+NEXT_PUBLIC_API_URL=https://your-lumos.onrender.com
+DATABASE_URL=postgresql://postgres:your-lumos@db.your-code.supabase.co:5432/postgres
+NEXT_PUBLIC_SUPABASE_URL=https://db.your-code.supabase.co
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
 JWT_SECRET=your-secret-key
-\`\`\`
+```
 
 ## 📚 Documentation
 
@@ -147,14 +153,14 @@ JWT_SECRET=your-secret-key
 
 #### Hello World
 
-\`\`\`lumos
+```lumos
 let message = "Hello, LumOS!"
 print(message)
-\`\`\`
+```
 
 #### Functions and Loops
 
-\`\`\`lumos
+```lumos
 def factorial(n) {
   if (n <= 1) {
     return 1
@@ -165,21 +171,21 @@ def factorial(n) {
 for i = 1 to 10 {
   print("Factorial of " + str(i) + " = " + str(factorial(i)))
 }
-\`\`\`
+```
 
 #### Compilation to Multiple Targets
 
-\`\`\`bash
+```bash
 lumos compile script.lumos python
 lumos compile script.lumos rust
 lumos compile script.lumos javascript
-\`\`\`
+```
 
 ### API Endpoints
 
 #### Code Execution
 
-\`\`\`http
+```http
 POST /execute
 Content-Type: application/json
 
@@ -187,11 +193,11 @@ Content-Type: application/json
   "language": "python",
   "code_snippet": "print('Hello from Python')"
 }
-\`\`\`
+```
 
 #### Lumos Execution
 
-\`\`\`http
+```http
 POST /lumos/execute
 Content-Type: application/json
 
@@ -199,11 +205,11 @@ Content-Type: application/json
   "code": "let x = 42\nprint(x)",
   "action": "execute"
 }
-\`\`\`
+```
 
 #### Lumos Compilation
 
-\`\`\`http
+```http
 POST /lumos/compile
 Content-Type: application/json
 
@@ -212,7 +218,7 @@ Content-Type: application/json
   "action": "compile",
   "target": "python"
 }
-\`\`\`
+```
 
 ## 🎮 Usage
 
@@ -225,14 +231,14 @@ Content-Type: application/json
 
 ### Terminal Commands
 
-\`\`\`bash
+```bash
 help
 ls
 pwd
 echo "Hello, LumOS"
 python3 -c "print('Python in browser')"
 lumos run script.lumos
-\`\`\`
+```
 
 ### File Operations
 
@@ -258,10 +264,10 @@ See [SECURITY.md](docs/SECURITY.md) for detailed guidelines.
 
 ### Vercel (Frontend)
 
-\`\`\`bash
+```bash
 cd frontend
 vercel deploy --prod
-\`\`\`
+```
 
 **Build Settings**:
 - Build Command: `npm run build`
@@ -276,10 +282,10 @@ vercel deploy --prod
 
 ### Render (Backend)
 
-\`\`\`bash
+```bash
 cd backend
 render.yaml configuration will be used automatically
-\`\`\`
+```
 
 **Settings**:
 - Build Command: `cargo build --release`
@@ -310,19 +316,19 @@ render.yaml configuration will be used automatically
 
 ### Running Tests
 
-\`\`\`bash
+```bash
 npm run test
 npm run test:frontend
 cargo test
-\`\`\`
+```
 
 ### Building
 
-\`\`\`bash
+```bash
 npm run build
 npm run build:frontend
 npm run build:backend
-\`\`\`
+```
 
 ## 🤝 Contributing
 
