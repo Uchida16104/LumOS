@@ -1,7 +1,7 @@
 use actix_web::{get, post, web, App, HttpRequest, HttpResponse, HttpServer, Responder, middleware};
 use actix_cors::Cors;
 use serde::{Deserialize, Serialize};
-use std::process::{Command, Stdio};
+use std::process::Command;
 use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
 use base64::{Engine as _, engine::general_purpose};
