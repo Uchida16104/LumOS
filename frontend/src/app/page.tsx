@@ -593,7 +593,7 @@ const DataAnalytics = () => {
 };
 
 const FileExplorer = () => {
-  const [currentPath, setCurrentPath] = useState('/');
+  const [currentPath] = useState('/');
 
   return (
     <div className="h-full flex flex-col">
