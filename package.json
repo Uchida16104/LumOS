@@ -1,6 +1,6 @@
 {
-  "name": "lumos-os",
-  "version": "2.1.0",
+  "name": "lumos-os-complete",
+  "version": "2.0.0",
   "description": "LumOS - Universal Polyglot Operating System with Lumos Language Integration",
   "private": true,
   "workspaces": [
@@ -8,26 +8,13 @@
     "backend/lumos-engine"
   ],
   "scripts": {
-    "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\" \"npm run dev:lumos\"",
+    "dev": "concurrently \"npm run dev:frontend\" \"npm run dev:backend\"",
     "dev:frontend": "cd frontend && npm run dev",
     "dev:backend": "cd backend && cargo run",
-    "dev:lumos": "cd backend/lumos-engine && node index.cjs",
-    "build": "npm run build:frontend && npm run build:backend && npm run build:lumos",
+    "build": "npm run build:frontend && npm run build:backend",
     "build:frontend": "cd frontend && npm run build",
     "build:backend": "cd backend && cargo build --release",
-    "build:lumos": "cd backend/lumos-engine && npm install",
-    "install:all": "npm install && cd frontend && npm install && cd ../backend/lumos-engine && npm install",
-    "start": "npm run start:frontend",
-    "start:frontend": "cd frontend && npm start",
-    "start:backend": "cd backend && ./target/release/lumos_backend",
-    "test": "npm run test:frontend && npm run test:backend",
-    "test:frontend": "cd frontend && npm run test",
-    "test:backend": "cd backend && cargo test",
-    "lint": "npm run lint:frontend",
-    "lint:frontend": "cd frontend && npm run lint",
-    "clean": "rm -rf frontend/.next frontend/node_modules backend/target backend/lumos-engine/node_modules node_modules",
-    "deploy:vercel": "cd frontend && vercel deploy --prod",
-    "deploy:render": "cd backend && git push render main"
+    "install:all": "npm install && cd frontend && npm install && cd ../backend/lumos-engine && npm install"
   },
   "devDependencies": {
     "concurrently": "^8.2.2"
@@ -36,26 +23,6 @@
     "node": ">=18.0.0",
     "npm": ">=9.0.0"
   },
-  "keywords": [
-    "lumos",
-    "os",
-    "polyglot",
-    "compiler",
-    "interpreter",
-    "network-tools",
-    "terminal",
-    "web-os",
-    "browser-os",
-    "multi-language"
-  ],
   "author": "Hirotoshi Uchida",
-  "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Uchida16104/LumOS.git"
-  },
-  "bugs": {
-    "url": "https://github.com/Uchida16104/LumOS/issues"
-  },
-  "homepage": "https://lumos-tawny-seven.vercel.app"
+  "license": "MIT"
 }

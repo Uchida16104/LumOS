@@ -1,370 +1,131 @@
 # LumOS - Universal Polyglot Operating System
 
-<div align="center">
+Version 2.0.0 - Complete Integration with Lumos Language
 
-![LumOS Banner](https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200&h=300&fit=crop)
+## 概要
 
-**Next-Generation Browser-Based Operating System with Lumos Language Integration**
+LumOSは、ブラウザで実行可能な次世代ポリグロットOSです。Lumos Languageを統合し、100以上のプログラミング言語をサポートします。
 
-[![Deploy on Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/Uchida16104/LumOS)
-[![Deploy on Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy)
+## アーキテクチャ
 
-[Live Demo](https://lumos-tawny-seven.vercel.app) | [Documentation](#documentation) | [Features](#features)
+```
+フロントエンド (Vercel)
+├── Next.js 14 + React 18
+├── TypeScript
+├── Tailwind CSS
+├── Framer Motion
+└── Lumos Language REPL
 
-</div>
+バックエンド (Render)
+├── Rust (Actix-web)
+├── Lumos Language Engine (Node.js)
+├── Python Runtime
+├── PHP/Laravel Runtime
+└── その他の言語ランタイム
 
-## 🌟 Overview
+データベース
+└── Supabase (PostgreSQL)
+```
 
-LumOS is a revolutionary browser-based operating system that brings the power of the Lumos Language to the web. Execute code in 100+ programming languages, manage files, analyze data, and perform network operations - all from your browser.
+## デプロイURL
 
-### Current Deployment
+- **フロントエンド**: https://lumos-tawny-seven.vercel.app/
+- **バックエンド**: https://lumos-faoy.onrender.com
+- **データベース**: postgresql://postgres:LumosLanguage2026@db.lxwracacdahhfxrfchtu.supabase.co:5432/postgres
 
-- **Frontend**: [https://lumos-tawny-seven.vercel.app](https://lumos-tawny-seven.vercel.app)
-- **Backend**: [https://lumos-faoy.onrender.com](https://lumos-faoy.onrender.com)
-- **Database**: Supabase PostgreSQL (lxwracacdahhfxrfchtu)
+## 機能
 
-## ✨ Features
+### コア機能
+- Lumos Language統合インタプリタ
+- 100以上の言語へのコンパイル
+- リアルタイムコード実行
+- 仮想ファイルシステム
+- ターミナルエミュレータ
+- システムモニタリング
 
-### 🎯 Core Capabilities
+### ネットワーク機能
+- SSH接続
+- ネットワーク分析
+- 外部API通信
+- WebSocket通信
 
-- **Lumos Language Integration**: Native support for Lumos Language with real-time execution and multi-target compilation
-- **Multi-Language Support**: Execute code in Python, Ruby, PHP, Rust, Go, COBOL, JavaScript, and 100+ languages
-- **File Management**: Complete virtual file system with upload, download, edit, and delete operations
-- **Network Tools**: ping, traceroute, nmap, SSH, FTP, and comprehensive network analysis
-- **Data Analytics**: Built-in data processing, analysis, and visualization tools
-- **Terminal Emulator**: Full-featured terminal supporting Linux, macOS, and Windows commands
-- **Database Operations**: Direct PostgreSQL integration via Supabase
+### データ処理
+- データ分析エンジン
+- リアルタイムデータ処理
+- データ可視化
 
-### 🔧 Technical Stack
+## セットアップ
 
-**Frontend**:
-- Next.js 14 (App Router)
-- React 18
-- TypeScript
-- Tailwind CSS
-- Framer Motion
-- Lucide Icons
+### 前提条件
+- Node.js 18以上
+- Rust 1.70以上
+- npm 9以上
 
-**Backend**:
-- Rust (Actix-Web)
-- Node.js (Lumos Engine)
-- PostgreSQL (Supabase)
-- Redis (Session Management)
+### インストール
 
-**Languages**:
-- Lumos Language (Primary)
-- Python, Ruby, PHP, JavaScript
-- Rust, Go, C, C++, C#
-- COBOL, Fortran, Assembly
-- And 90+ more...
-
-## 📊 Architecture
-
-\`\`\`mermaid
-graph TB
-    subgraph "Frontend - Vercel"
-        A[Next.js App]
-        B[Desktop UI]
-        C[Terminal]
-        D[File Explorer]
-        E[Lumos Editor]
-        F[Network Tools]
-        
-        A --> B
-        B --> C
-        B --> D
-        B --> E
-        B --> F
-    end
-    
-    subgraph "Backend - Render"
-        G[Rust Core]
-        H[Lumos Engine]
-        I[Code Executor]
-        J[Network Handler]
-        K[File System]
-        
-        G --> H
-        G --> I
-        G --> J
-        G --> K
-    end
-    
-    subgraph "Database - Supabase"
-        L[(PostgreSQL)]
-        M[Files Table]
-        N[Logs Table]
-        O[Analytics Table]
-        
-        L --> M
-        L --> N
-        L --> O
-    end
-    
-    A -->|REST API| G
-    G -->|SQL| L
-    H -->|Execute| I
-    
-    style A fill:#0070f3
-    style G fill:#f74c00
-    style L fill:#3ecf8e
-\`\`\`
-
-## 🚀 Quick Start
-
-### Prerequisites
-
-- Node.js >= 18.0.0
-- Rust >= 1.70.0
-- PostgreSQL (via Supabase)
-
-### Installation
-
-\`\`\`bash
+```bash
 git clone https://github.com/Uchida16104/LumOS.git
 cd LumOS
-
-cp .env.example .env
-
 npm run install:all
+```
 
+### 開発サーバー起動
+
+```bash
 npm run dev
-\`\`\`
+```
 
-### Environment Variables
+### ビルド
 
-\`\`\`env
-NEXT_PUBLIC_API_URL=https://lumos-faoy.onrender.com
-DATABASE_URL=postgresql://postgres:LumosLanguage2026@db.lxwracacdahhfxrfchtu.supabase.co:5432/postgres
-NEXT_PUBLIC_SUPABASE_URL=https://db.lxwracacdahhfxrfchtu.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
-JWT_SECRET=your-secret-key
-\`\`\`
-
-## 📚 Documentation
-
-### Lumos Language Examples
-
-#### Hello World
-
-\`\`\`lumos
-let message = "Hello, LumOS!"
-print(message)
-\`\`\`
-
-#### Functions and Loops
-
-\`\`\`lumos
-def factorial(n) {
-  if (n <= 1) {
-    return 1
-  }
-  return n * factorial(n - 1)
-}
-
-for i = 1 to 10 {
-  print("Factorial of " + str(i) + " = " + str(factorial(i)))
-}
-\`\`\`
-
-#### Compilation to Multiple Targets
-
-\`\`\`bash
-lumos compile script.lumos python
-lumos compile script.lumos rust
-lumos compile script.lumos javascript
-\`\`\`
-
-### API Endpoints
-
-#### Code Execution
-
-\`\`\`http
-POST /execute
-Content-Type: application/json
-
-{
-  "language": "python",
-  "code_snippet": "print('Hello from Python')"
-}
-\`\`\`
-
-#### Lumos Execution
-
-\`\`\`http
-POST /lumos/execute
-Content-Type: application/json
-
-{
-  "code": "let x = 42\nprint(x)",
-  "action": "execute"
-}
-\`\`\`
-
-#### Lumos Compilation
-
-\`\`\`http
-POST /lumos/compile
-Content-Type: application/json
-
-{
-  "code": "def greet(name) { return 'Hello, ' + name }",
-  "action": "compile",
-  "target": "python"
-}
-\`\`\`
-
-## 🎮 Usage
-
-### Desktop Interface
-
-1. Access the live demo at [https://lumos-tawny-seven.vercel.app](https://lumos-tawny-seven.vercel.app)
-2. Click on desktop icons to launch applications
-3. Drag windows to reposition them
-4. Minimize/maximize windows using titlebar buttons
-
-### Terminal Commands
-
-\`\`\`bash
-help
-ls
-pwd
-echo "Hello, LumOS"
-python3 -c "print('Python in browser')"
-lumos run script.lumos
-\`\`\`
-
-### File Operations
-
-1. Open File Explorer
-2. Upload files via drag-and-drop
-3. Edit files in the Lumos Editor
-4. Execute or compile Lumos files
-5. Download generated outputs
-
-## 🔐 Security
-
-**⚠️ Important Security Notes**:
-
-- Default credentials are for development only
-- Change all passwords before production deployment
-- Network tools require proper authentication
-- Command execution is sandboxed
-- File uploads are scanned and validated
-
-See [SECURITY.md](docs/SECURITY.md) for detailed guidelines.
-
-## 📦 Deployment
-
-### Vercel (Frontend)
-
-\`\`\`bash
-cd frontend
-vercel deploy --prod
-\`\`\`
-
-**Build Settings**:
-- Build Command: `npm run build`
-- Output Directory: `.next`
-- Install Command: `npm install`
-- Root Directory: `frontend`
-
-**Environment Variables**:
-- `NEXT_PUBLIC_API_URL`: `https://lumos-faoy.onrender.com`
-- `NEXT_PUBLIC_SUPABASE_URL`: Your Supabase URL
-- `NEXT_PUBLIC_SUPABASE_ANON_KEY`: Your Supabase anon key
-
-### Render (Backend)
-
-\`\`\`bash
-cd backend
-render.yaml configuration will be used automatically
-\`\`\`
-
-**Settings**:
-- Build Command: `cargo build --release`
-- Start Command: `./target/release/lumos_backend`
-- Root Directory: `backend`
-
-**Environment Variables**:
-- `DATABASE_URL`: PostgreSQL connection string
-- `RUST_LOG`: `info`
-- `JWT_SECRET`: Your secret key
-
-### Supabase (Database)
-
-1. Create a new Supabase project
-2. Run `database/schema.sql` in SQL Editor
-3. Note your connection string
-4. Update environment variables
-
-## 🛠️ Development
-
-### Project Structure
-
-- `frontend/`: Next.js frontend application
-- `backend/`: Rust backend server
-- `backend/lumos-engine/`: Lumos Language interpreter and compiler
-- `database/`: SQL schemas and migrations
-- `docs/`: Documentation files
-
-### Running Tests
-
-\`\`\`bash
-npm run test
-npm run test:frontend
-cargo test
-\`\`\`
-
-### Building
-
-\`\`\`bash
+```bash
 npm run build
-npm run build:frontend
-npm run build:backend
-\`\`\`
+```
 
-## 🤝 Contributing
+## ディレクトリ構造
 
-Contributions are welcome! Please read our contributing guidelines before submitting PRs.
+```
+lumos-os-complete/
+├── package.json
+├── README.md
+├── LICENSE
+├── .gitignore
+├── .env.example
+├── vercel.json
+├── frontend/
+│   ├── package.json
+│   ├── next.config.mjs
+│   ├── tsconfig.json
+│   ├── tailwind.config.ts
+│   ├── postcss.config.mjs
+│   ├── public/
+│   └── src/
+│       ├── app/
+│       ├── components/
+│       ├── lib/
+│       └── types/
+├── backend/
+│   ├── Cargo.toml
+│   ├── render.yaml
+│   ├── src/
+│   │   └── main.rs
+│   ├── lumos-engine/
+│   │   ├── package.json
+│   │   ├── src/
+│   │   └── examples/
+│   └── runtimes/
+└── database/
+    └── schema.sql
+```
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Add tests
-5. Submit a pull request
+## ライセンス
 
-## 📄 License
+MIT License - Copyright (c) 2026 Hirotoshi Uchida
 
-MIT License - see [LICENSE](LICENSE) for details
+## 作成者
 
-## 👨‍💻 Author
+Hirotoshi Uchida
 
-**Hirotoshi Uchida**
+## リンク
 
-- GitHub: [@Uchida16104](https://github.com/Uchida16104)
-- Email: contact@lumos-os.dev
-
-## 🙏 Acknowledgments
-
-- Lumos Language Team
-- Rust Community
-- Next.js Team
-- Supabase Team
-- Open Source Contributors
-
-## 📞 Support
-
-- GitHub Issues: [Report a bug](https://github.com/Uchida16104/LumOS/issues)
-- Documentation: [Read the docs](https://github.com/Uchida16104/LumOS/wiki)
-- Community: [Join Discord](https://discord.gg/lumos)
-
----
-
-<div align="center">
-
-**Built with ❤️ using Lumos Language**
-
-[⬆ Back to Top](#lumos---universal-polyglot-operating-system)
-
-</div>
+- [Lumos Language](https://github.com/Uchida16104/Lumos-Language)
+- [公式サイト](https://lumos-tawny-seven.vercel.app/)
