@@ -4,8 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Terminal, Folder, X, Minus, Square, Database, Code, 
-  Network, FileCode, Wifi, BarChart, Settings, Monitor,
-  HardDrive, Cpu, Activity
+  FileCode, Wifi, BarChart, Monitor, HardDrive, Cpu, Activity
 } from 'lucide-react';
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://lumos-faoy.onrender.com';
