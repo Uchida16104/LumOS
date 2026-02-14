@@ -593,7 +593,6 @@ const DataAnalytics = () => {
 };
 
 const FileExplorer = () => {
-  const [files, setFiles] = useState<any[]>([]);
   const [currentPath, setCurrentPath] = useState('/');
 
   return (
