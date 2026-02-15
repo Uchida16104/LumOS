@@ -4,17 +4,15 @@ version = "2.1.0"
 edition = "2021"
 authors = ["Hirotoshi Uchida"]
 license = "MIT"
-description = "LumOS Backend Server with Polyglot Runtime Support"
+description = "LumOS Backend Server with Polyglot Runtime Support and Lumos Language Integration"
 
 [dependencies]
 actix-web = "4.4"
 actix-cors = "0.7"
 actix-files = "0.6"
-actix-web-actors = "4.2"
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 tokio = { version = "1", features = ["full"] }
-tokio-tungstenite = "0.21"
 futures = "0.3"
 uuid = { version = "1.6", features = ["v4", "serde"] }
 chrono = { version = "0.4", features = ["serde"] }
@@ -29,12 +27,8 @@ anyhow = "1.0"
 async-trait = "0.1"
 reqwest = { version = "0.11", features = ["json"] }
 sqlx = { version = "0.7", features = ["runtime-tokio-native-tls", "postgres", "uuid", "chrono"] }
-redis = { version = "0.24", features = ["tokio-comp", "connection-manager"] }
-ssh2 = "0.9"
-ftp = "3.0"
 hostname = "0.3"
 sysinfo = "0.30"
-nix = { version = "0.27", features = ["net"] }
 regex = "1.10"
 
 [dev-dependencies]
@@ -44,3 +38,4 @@ actix-rt = "2.9"
 opt-level = 3
 lto = true
 codegen-units = 1
+strip = true

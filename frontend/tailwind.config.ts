@@ -15,9 +15,27 @@ const config: Config = {
       animation: {
         'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
         'spin-slow': 'spin 3s linear infinite',
+        'bounce-slow': 'bounce 2s infinite',
       },
       fontFamily: {
-        mono: ['JetBrains Mono', 'Consolas', 'Monaco', 'monospace'],
+        mono: ['JetBrains Mono', 'Consolas', 'Monaco', 'Courier New', 'monospace'],
+        sans: ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
+      },
+      colors: {
+        terminal: {
+          bg: '#1a1b26',
+          text: '#a9b1d6',
+          cursor: '#c0caf5',
+          selection: '#33467c',
+        },
+        editor: {
+          bg: '#24283b',
+          line: '#1f2335',
+          gutter: '#3b4261',
+        },
+      },
+      backdropBlur: {
+        xs: '2px',
       },
     },
   },
