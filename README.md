@@ -2,8 +2,6 @@
 
 <div align="center">
 
-![LumOS Banner](https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1200&h=300&fit=crop)
-
 **Next-Generation Browser-Based Operating System with Lumos Language Integration**
 
 [![Deploy on Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/Uchida16104/LumOS)
@@ -12,62 +10,40 @@
 
 </div>
 
-## 🌟 Overview
+## Overview
 
-LumOS is a revolutionary browser-based operating system that brings the power of the Lumos Language to the web. Execute code in 100+ programming languages, manage files, analyze data, and perform network operations - all from your browser.
+LumOS represents a revolutionary approach to browser-based operating systems, bringing the comprehensive power of the Lumos Language directly to web environments. The system enables execution of code across more than one hundred programming languages, provides robust file management capabilities, delivers sophisticated data analysis tools, and facilitates comprehensive network operations - all accessible through a modern web browser interface.
 
 ### Current Deployment
 
-- **Frontend**: [https://lumos-tawny-seven.vercel.app](https://lumos-tawny-seven.vercel.app)
-- **Backend**: [https://lumos-faoy.onrender.com](https://lumos-faoy.onrender.com)
-- **Database**: Supabase PostgreSQL
+The production deployment operates across three primary infrastructure components. The frontend application is hosted on Vercel at https://lumos-tawny-seven.vercel.app, providing users with a responsive and highly available interface. The backend services run on Render at https://lumos-faoy.onrender.com, delivering robust API endpoints and code execution capabilities. Database operations are managed through Supabase's managed PostgreSQL service, ensuring reliable data persistence and scalability.
 
-## ✨ Features
+## Core Capabilities
 
-### 🎯 Core Capabilities
+The Lumos Language integration provides native support for real-time code execution and multi-target compilation, enabling developers to write code once and deploy across numerous platforms and environments. The multi-language execution environment supports Python, Ruby, PHP, Rust, Go, COBOL, JavaScript, and more than one hundred additional programming languages, each with proper runtime isolation and resource management.
 
-- **Lumos Language Integration**: Native support for Lumos Language with real-time execution and multi-target compilation
-- **Multi-Language Support**: Execute code in Python, Ruby, PHP, Rust, Go, COBOL, JavaScript, and 100+ languages
-- **File Management**: Complete virtual file system with upload, download, edit, and delete operations
-- **Network Tools**: ping, traceroute, nmap, SSH, FTP, and comprehensive network analysis
-- **Data Analytics**: Built-in data processing, analysis, and visualization tools
-- **Terminal Emulator**: Full-featured terminal supporting Linux, macOS, and Windows commands
-- **Database Operations**: Direct PostgreSQL integration via Supabase
+The file management system implements a complete virtual filesystem supporting upload, download, edit, and delete operations with proper permission controls and security policies. Network diagnostic tools provide comprehensive capabilities including ping, traceroute, nmap, SSH, FTP, and advanced network analysis features suitable for professional network administration tasks.
 
-### 🔧 Technical Stack
+Data analytics functionality delivers built-in data processing, analysis, and visualization tools that operate seamlessly within the browser environment. The terminal emulator provides a full-featured command-line interface supporting Linux, macOS, and Windows commands with appropriate platform-specific handling and security controls.
 
-**Frontend**: Next.js 14, React 18, TypeScript, Tailwind CSS, Framer Motion
+Database operations integrate directly with PostgreSQL through Supabase, enabling sophisticated data management scenarios including user authentication, file storage, execution logging, and analytics tracking.
 
-**Backend**: Rust (Actix-Web), Node.js (Lumos Engine), PostgreSQL (Supabase)
+## Technical Architecture
 
-**Languages**: Lumos, Python, Ruby, PHP, JavaScript, Rust, Go, C, C++, C#, COBOL, and 90+ more
+The system architecture follows modern cloud-native principles with clear separation of concerns across multiple layers. The frontend employs Next.js 14 with React 18 and TypeScript, providing a type-safe and performant user interface with real-time updates and responsive design. Styling leverages Tailwind CSS for rapid development and consistent visual presentation, while Framer Motion delivers smooth animations and transitions throughout the interface.
 
-## 📊 Architecture
+The backend implements a hybrid architecture combining Rust with Actix-Web for high-performance API endpoints and request handling, while the Lumos Language engine operates on Node.js to provide dynamic code execution and compilation capabilities. Database persistence utilizes PostgreSQL hosted on Supabase, benefiting from enterprise-grade reliability and built-in security features.
 
-The system follows a three-tier architecture with frontend on Vercel, backend on Render, and database on Supabase.
+Language support encompasses Lumos, Python, Ruby, PHP, JavaScript, Rust, Go, C, C++, C#, COBOL, and more than ninety additional programming languages, each with appropriate runtime configuration and security sandboxing to prevent unauthorized system access.
 
-## 🚀 Quick Start
+## Getting Started
 
-```bash
-git clone https://github.com/Uchida16104/LumOS.git
-cd LumOS
-cp .env.example .env
-npm run install:all
-npm run dev
-```
+To begin working with LumOS locally, first clone the repository from GitHub using the command git clone https://github.com/Uchida16104/LumOS.git and navigate into the project directory. Copy the environment example file to create your local configuration with cp .env.example .env, then install all dependencies across the monorepo workspace using npm run install:all. Finally, start the complete development environment with npm run dev.
 
-See INSTALL.md for detailed installation instructions.
+For detailed installation instructions including system requirements, dependency management, and troubleshooting guidance, please refer to the INSTALL.md file included in the project documentation.
 
-## 📄 License
+## License and Author
 
-MIT License - see LICENSE for details
+This project is distributed under the MIT License as detailed in the LICENSE file. Development and maintenance are led by Hirotoshi Uchida, whose GitHub profile can be found at github.com/Uchida16104.
 
-## 👨‍💻 Author
-
-**Hirotoshi Uchida**
-
-- GitHub: [@Uchida16104](https://github.com/Uchida16104)
-
----
-
-**Built with ❤️ using Lumos Language**
+The system is built with dedication to the Lumos Language and represents a comprehensive implementation of modern web-based operating system concepts.

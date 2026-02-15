@@ -25,9 +25,7 @@
     "test:backend": "cd backend && cargo test",
     "lint": "npm run lint:frontend",
     "lint:frontend": "cd frontend && npm run lint",
-    "clean": "rm -rf frontend/.next frontend/node_modules backend/target backend/lumos-engine/node_modules node_modules",
-    "deploy:vercel": "cd frontend && vercel deploy --prod",
-    "deploy:render": "cd backend && git push render main"
+    "clean": "rm -rf frontend/.next frontend/node_modules backend/target backend/lumos-engine/node_modules node_modules"
   },
   "devDependencies": {
     "concurrently": "^8.2.2"
